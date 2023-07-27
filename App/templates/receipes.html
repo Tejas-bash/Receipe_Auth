@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+  <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <h2 class="text-center">Add Receipe</h2>
+    <hr>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Receipe Name</label>
+      <input type="text" name="receipe_name" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Receipe Description</label>
+      <textarea class="form-control" name="receipe_description" required></textarea>
+    </div>
+    <div class="mb-3 form-check">
+      <label for="" class="form-label">Receipe Image</label>
+      <input type="file" class="form-control" name="receipe_image">
+    </div>
+    <button type="submit" class="btn btn-success">Add Receipe</button>
+  </form>
+  <hr>
+  <div class="mt-5">
+    <div class="mx-auto col-6">
+      <div class="mb-3">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="Search">
+          <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <br><br>
+  <table class="table text-center" style="border: 3px solid red;">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Receipe Name</th>
+        <th scope="col">Receipe Description</th>
+        <th scope="col">Receipe Image</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in Receipe %}
+      <tr>
+        <td>{{forloop.counter}}</td>
+        <td>{{i.receipe_name}}</td>
+        <td>{{i.receipe_description}}</td>
+        <td><img src="/media/{{i.receipe_image}}" class="p-2" style="height: 200px;width: 150px;"></td>
+        <td><a href="{% url 'delete_Receipe' i.id %}" class="btn btn-primary mb-3">Delete</a>
+          <a href="{% url 'update_receipe' i.id %}" class="btn btn-primary">Update</a>
+        </td>
+
+        <!-- <td><a href="/delete_receipe/{{i.id}}" class="btn btn-primary">Delete</a></td> -->
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock content %}
