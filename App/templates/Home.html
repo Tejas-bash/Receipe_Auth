@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block log %}
+{% endblock %}
+{% block content %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Welcome</a>
+        <div class="d-flex justify-content-end align-items-center">
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'receipes' %}"><button class="btn btn-success me-2" type="submit">Go to Your Profile</button></a>
+            <a href="{% url 'Userlogout' %}"><button class="btn btn-success" type="submit">Signout</button></a>
+            {% else %}
+            <a href="{% url 'register' %}"><button class="btn btn-success me-2" type="submit">Register</button></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <div class="col-sm-12 text-center">
+        <p class="alert alert-warning">We invite you to join our amazing recipe-sharing platform! Register now to become a part of our community and share your delightful recipes</p>
+    </div>
+    <hr>
+    <table class="table text-center" style="border: 3px solid red;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Receipe Name</th>
+                <th scope="col">Receipe Description</th>
+                <th scope="col">Receipe Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in Receipe %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.receipe_name}}</td>
+                <td>{{i.receipe_description}}</td>
+                <td><img src="/media/{{i.receipe_image}}" class="p-2" style="height: 200px;width: 150px;"></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

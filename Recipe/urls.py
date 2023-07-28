@@ -23,9 +23,13 @@ from App import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.receipe, name='receipes'),
+    path('Receipe/', views.receipe, name='receipes'),
     path('delete_receipe/<id>/', views.delete_receipe, name='delete_Receipe'),
-    path('update-receipe/<id>', views.update_receipe, name='update_receipe')
+    path('update-receipe/<id>', views.update_receipe, name='update_receipe'),
+    path('register/',views.register,name = 'register'),
+    path('login/',views.Sign_in,name = 'Sign_in'),
+    path('Userlogout/',views.user_logout,name='Userlogout'),
+    path('',views.Home,name='Home'),
 ]
 
 if settings.DEBUG:
